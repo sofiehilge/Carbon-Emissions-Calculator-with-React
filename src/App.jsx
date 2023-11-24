@@ -3,11 +3,17 @@ import Results from "./components/Results";
 import useSite from "./hooks/useSite";
 import Error from "./components/Error";
 import "./App.css";
+import ResisableSlider from "./components/ResisableSlider";
+import { SiteProvider } from "./context/SiteContext";
+import Comparison from "./components/Comparison";
 
 function App() {
   const [url, setUrl] = useState("");
   const { data, refetch, fetchStatus, isError } = useSite(url);
   const isLoading = fetchStatus === "fetching";
+
+  //check if data is available, and use a default value if not
+  const site = data || { cleanerThan: 0 };
 
   return (
     <div
@@ -61,19 +67,23 @@ function App() {
           hours.
         </p>
       </div>
-      <div
-        style={{
-          width: "100%",
-          justifyContent: "center",
-          paddingTop: "5px",
-          paddingLeft: "5px",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        {data && <Results site={data} />}
-        {isError && <Error />}
-      </div>
+      <SiteProvider value={{ cleanerThan: site.cleanerThan }}>
+        <div
+          style={{
+            width: "100%",
+            justifyContent: "center",
+            paddingTop: "5px",
+            paddingLeft: "5px",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          {data && <Results site={data} />}
+          {isError && <Error />}
+          {data && <ResisableSlider cleanerThan={site.cleanerThan} />}
+          {data && <Comparison />}
+        </div>
+      </SiteProvider>
     </div>
   );
 }

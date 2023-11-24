@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import site from "../entities";
+
+
 
 const Paperbox = styled.div`
   background-color: #fff;
