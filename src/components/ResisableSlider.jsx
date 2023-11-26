@@ -25,10 +25,25 @@ const Thumb = (props, state) => (
 const StyledTrack = styled.div`
   top: 0;
   bottom: 0;
-  background: ${(props) =>
-    props.index === 2 ? "#f00" : props.index === 1 ? "#0f0" : "#ddd"};
+  background: linear-gradient(
+    to right,
+    ${(props) => getColor(props.index, 0)} 0%,
+    ${(props) => getColor(props.index, 50)} 50%,
+    ${(props) => getColor(props.index, 100)} 100%
+  );
   border-radius: 999px;
 `;
+
+const getColor = (index, value) => {
+  // Define color stops for green, yellow, orange, and red
+  const colors = ["#0f0", "#ff0", "#ffa500", "#f00"];
+  
+  // Determine the color based on the value and the index of the stop
+  const colorIndex = index === 2 ? 3 : index === 1 ? 2 : 0;
+  
+  // Interpolate between colors based on the value
+  return colors[colorIndex];
+};
 
 const Track = (props, state) => <StyledTrack {...props} index={state.index} />;
 
