@@ -3,11 +3,17 @@ import Results from "./components/Results";
 import useSite from "./hooks/useSite";
 import Error from "./components/Error";
 import "./App.css";
+import ResisableSlider from "./components/ResisableSlider";
+import { SiteProvider } from "./context/SiteContext";
+import Comparison from "./components/Comparison";
 
 function App() {
   const [url, setUrl] = useState("");
   const { data, refetch, fetchStatus, isError } = useSite(url);
   const isLoading = fetchStatus === "fetching";
+
+  //check if data is available, and use a default value if not
+  const site = data || { cleanerThan: 0 };
 
   return (
     <div className="p-4 m-4">
@@ -51,10 +57,14 @@ function App() {
           hours.
         </p>
       </div>
+ <SiteProvider value={{ cleanerThan: site.cleanerThan }}>
       <div className="w-full mt-4">
         {data && <Results site={data} />}
         {isError && <Error />}
-      </div>
+         {data && <ResisableSlider cleanerThan={site.cleanerThan} />}
+          {data && <Comparison />}
+        </div>
+      </SiteProvider>
     </div>
   );
 }

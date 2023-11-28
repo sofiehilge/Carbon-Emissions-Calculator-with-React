@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import site from "../entities";
+import { useGrams } from "../context/GramsContext";
 
 const Paperbox = styled.div`
   background-color: white;
@@ -29,6 +29,16 @@ const TextHighlightFail = styled(TextHighlight)`
 `;
 
 const Results = ({ site }) => {
+  const { setGramsData } = useGrams();
+  const [co2Value, setCo2Value] = useState(0);
+
+  useEffect(()=> {
+    const fethchedCo2 = site.co2.toFixed(2);
+    //set the fetched c02 in the state
+    setCo2Value(fethchedCo2);
+    //also set the gramsData in the context
+    setGramsData(fethchedCo2);
+  }, [site.c02, setGramsData]);
   return (
     <Paperbox>
       <div style={{ marginBottom: "16px" }}>
@@ -60,8 +70,10 @@ const Results = ({ site }) => {
           </TextHighLightSuccess>
         ) : (
           <TextHighlightFail>{site.co2.toFixed(2)}g of CO2</TextHighlightFail>
+
         )}{" "}
         is produced every time someone visits this web page.
+
       </p>
     </Paperbox>
   );
