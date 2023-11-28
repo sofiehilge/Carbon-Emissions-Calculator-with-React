@@ -4,9 +4,9 @@ import PaperBox from "./Paperbox";
 const Error = () => {
   return (
     <PaperBox textAlign="center">
-      <div style={{ marginBottom: "16px" }}>
+      <div style={{ marginBottom: "10px" }}>
         <h5 style={{ fontWeight: "bold" }}>Error</h5>
-        <p>Cannot retrieve result.</p>
+        <p>Could not retrieve any result.</p>
       </div>
     </PaperBox>
   );

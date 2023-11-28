@@ -3,15 +3,18 @@ import styled from "styled-components";
 import { useGrams } from "../context/GramsContext";
 
 const Paperbox = styled.div`
-  background-color: #fff;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  padding: 20px;
+  border-radius: 0.25em;
+
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 const TextHighlight = styled.span`
-  padding: 6px;
-  border-radius: 10px;
+  padding: 3px;
+  border-radius: 5px;
   display: inline;
 `;
 
@@ -47,7 +50,7 @@ const Results = ({ site }) => {
         </p>
       </div>
       <p>
-        This website is
+        This website is{" "}
         {site.cleanerThan >= 50 ? (
           <TextHighLightSuccess>
             cleaner than {site.cleanerThan}%
@@ -56,9 +59,10 @@ const Results = ({ site }) => {
           <TextHighlightFail>
             dirtier than {100 - site.cleanerThan}%
           </TextHighlightFail>
-        )}
+        )}{" "}
         of web pages tested.
       </p>
+      <br />
       <p>
         {site.co2 < 0.5 ? (
           <TextHighLightSuccess>
@@ -66,8 +70,10 @@ const Results = ({ site }) => {
           </TextHighLightSuccess>
         ) : (
           <TextHighlightFail>{site.co2.toFixed(2)}g of CO2</TextHighlightFail>
-        )}
-        is produced every time someone visits this web page
+
+        )}{" "}
+        is produced every time someone visits this web page.
+
       </p>
     </Paperbox>
   );
