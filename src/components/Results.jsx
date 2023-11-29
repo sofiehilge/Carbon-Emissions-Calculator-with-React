@@ -5,7 +5,7 @@ import { useGrams } from "../context/GramsContext";
 const Paperbox = styled.div`
   background-color: white;
   padding: 20px;
-  border-radius: 0.25em;
+  border-radius: 12px;
 
   @media (max-width: 768px) {
     padding: 10px;
@@ -32,7 +32,7 @@ const Results = ({ site }) => {
   const { setGramsData } = useGrams();
   const [co2Value, setCo2Value] = useState(0);
 
-  useEffect(()=> {
+  useEffect(() => {
     const fethchedCo2 = site.co2.toFixed(2);
     //set the fetched c02 in the state
     setCo2Value(fethchedCo2);
@@ -70,10 +70,8 @@ const Results = ({ site }) => {
           </TextHighLightSuccess>
         ) : (
           <TextHighlightFail>{site.co2.toFixed(2)}g of CO2</TextHighlightFail>
-
         )}{" "}
         is produced every time someone visits this web page.
-
       </p>
     </Paperbox>
   );

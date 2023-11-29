@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
 #root {
   display: flex;
   justify-content: center;
@@ -5,5 +7,10 @@
   height: 100vh;
   margin: 0 auto;
   text-align: center;
-  background-color: grey;
+  font-family: 'Montserrat', sans-serif;
+}
+
+html, body {
+  background: url(https://library.nomadadigital.eu/wp-content/uploads/2023/10/sky-yodo-final-scaled.jpg) ;
+  background-size: cover;
 }

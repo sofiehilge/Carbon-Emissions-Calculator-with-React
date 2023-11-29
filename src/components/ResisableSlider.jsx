@@ -5,58 +5,67 @@ import styled from "styled-components";
 const StyledSlider = styled(ReactSlider)`
   width: 100%;
   height: 25px;
+  margin-bottom: 20px;
 `;
 
 const StyledThumb = styled.div`
+  width: 50px;
   height: 25px;
-  line-height: 25px;
-  width: 25px;
+  background-color: white;
   text-align: center;
-  background-color: #000;
-  color: #fff;
-  border-radius: 50%;
-  cursor: grab;
+  border: solid 2px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: default;
 `;
 
 const Thumb = (props, state) => (
-  <StyledThumb {...props}>{state.valueNow}</StyledThumb>
+  <StyledThumb {...props}>{state.valueNow}%</StyledThumb>
 );
 
 const StyledTrack = styled.div`
   top: 0;
   bottom: 0;
-  background: linear-gradient(
-    to right,
-    ${(props) => getColor(props.index, 0)} 0%,
-    ${(props) => getColor(props.index, 50)} 50%,
-    ${(props) => getColor(props.index, 100)} 100%
-  );
-  border-radius: 999px;
+  border: solid white;
+  border-radius: 100px;
+  background: url(https://library.nomadadigital.eu/wp-content/uploads/2023/10/sky-yodo-final-scaled.jpg);
 `;
 
-const getColor = (index, value) => {
-  // Define color stops for green, yellow, orange, and red
-  const colors = ["#0f0", "#ff0", "#ffa500", "#f00"];
-  
-  // Determine the color based on the value and the index of the stop
-  const colorIndex = index === 2 ? 3 : index === 1 ? 2 : 0;
-  
-  // Interpolate between colors based on the value
-  return colors[colorIndex];
-};
+const Track = (props) => <StyledTrack {...props} index={props.index} />;
 
-const Track = (props, state) => <StyledTrack {...props} index={state.index} />;
+const Mark = styled.div`
+  height: 5px;
+  width: 1px;
+  background-color: white;
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+`;
 
-const ResisableSlider = ({ cleanerThan }) => {
+const Marks = ({ children, ...props }) => (
+  <div {...props}>
+    {[...Array(11).keys()].map((i) => (
+      <Mark key={i} style={{ right: `${i * (100 / 10)}%` }} />
+    ))}
+    {children}
+  </div>
+);
+
+const ResizableSlider = ({ cleanerThan }) => {
   return (
-    <StyledSlider
-      defaultValue={100-cleanerThan}
-      disabled={true}
-      /* onChange={(value)} */
-      renderTrack={Track}
-      renderThumb={Thumb}
-    />
+    <div>
+      <StyledSlider
+        defaultValue={100 - cleanerThan}
+        disabled={true}
+        renderTrack={Track}
+        renderThumb={Thumb}
+      />
+      <Marks />
+    </div>
   );
 };
 
-export default ResisableSlider;
+export default ResizableSlider;
