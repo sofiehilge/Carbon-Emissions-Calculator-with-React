@@ -20,11 +20,11 @@ const Comparison = () => {
   ]);
 
   const handleIncrement = () => {
-    setMonthlyViews((prevViews) => (prevViews < 10000 ? prevViews + 100 : 100));
+    setMonthlyViews((prevViews) => (prevViews < 1000 ? prevViews + 100 : 100));
   };
 
   const handleDecrement = () => {
-    setMonthlyViews((prevViews) => (prevViews > 100 ? prevViews - 100 : 10000));
+    setMonthlyViews((prevViews) => (prevViews > 100 ? prevViews - 100 : 1000));
   };
 
   useEffect(() => {
@@ -42,35 +42,48 @@ const Comparison = () => {
 
   return (
     <>
-      <p>Over a year, with</p>
-      <button
-        onClick={handleDecrement}
-        className="px-4 py-2 m-2 font-bold text-white bg-red-700 rounded-full"
-      >
-        -
-      </button>
-      <span>{formattedMonthlyViews && formattedMonthlyViews[0]}</span>
-      <button
-        onClick={handleIncrement}
-        className="px-4 py-2 m-2 font-bold text-white bg-green-700 rounded-full"
-      >
-        +
-      </button>
-      <p>monthly page views, this web page produces</p>
-      <span>{formattedCO2Value && formattedCO2Value[0]}</span>
-      <p>kg of CO2 equivalent.</p>
+      <p className="mt-8">Over a year, with</p>
+      <div className="flex items-center justify-center mt-2 space-x-4">
+        <button
+          onClick={handleDecrement}
+          className="px-4 py-2 font-bold text-white bg-red-700 rounded-full"
+        >
+          -
+        </button>
+        <span className="text-2xl font-bold">
+          {formattedMonthlyViews && formattedMonthlyViews[0]}
+        </span>
+        <button
+          onClick={handleIncrement}
+          className="px-4 py-2 font-bold text-white bg-green-700 rounded-full"
+        >
+          +
+        </button>
+      </div>
+      <p className="mt-2">monthly page views, this web page produces</p>
+      <span className="mt-2 text-3xl font-bold">
+        {formattedCO2Value && formattedCO2Value[0]}
+      </span>
+      <p className="mt-2 font-bold">kg of CO2</p>
       <p>
-        As much CO2 as boiling water for
-        <span>{formattedNumberTee && formattedNumberTee[0]}</span> cups of tea
+        As much CO2 as boiling water for{" "}
+        <span className="text-xl font-bold">
+          {formattedNumberTee && formattedNumberTee[0]}
+        </span>{" "}
+        cups of tea
       </p>
       <p>
-        This webpage emits the same amount as
-        <span> {numberTrees}</span> trees can absorb in one year
+        This webpage emits the same amount as{" "}
+        <span className="text-xl font-bold"> {numberTrees}</span> trees can
+        absorb in one year
       </p>
-
-      <button className="p-2 px-12 m-6 text-sm text-white bg-black rounded-full">
-        Take action
-      </button>
+      <b>Take action here ›</b>
+      <a
+        href="https://withyodo.com/get-access/"
+        className="inline-block w-1/3 p-2 px-12 m-4 text-sm text-center text-white bg-black rounded-full"
+      >
+        Get early access
+      </a>
     </>
   );
 };

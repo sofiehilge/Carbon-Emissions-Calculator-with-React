@@ -44,7 +44,7 @@ function App() {
             className="p-2 px-12 mb-6 text-sm text-white bg-black rounded-full"
             type="submit"
           >
-            {isLoading ? "Loading..." : "Search"}
+            {isLoading ? "Loading..." : "Search ›"}
           </button>
         </form>
         <SiteProvider value={{ cleanerThan: site.cleanerThan }}>
