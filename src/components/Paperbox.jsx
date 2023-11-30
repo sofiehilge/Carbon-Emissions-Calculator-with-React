@@ -4,7 +4,7 @@ import styled from "styled-components";
 const PaperBox = styled.div`
   padding: 10px;
   background-color: orange;
-  border-radius: 10px;
+  border-radius: 12px;
 
   @media (max-width: 768px) {
     padding: 15px;
