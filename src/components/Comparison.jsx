@@ -20,12 +20,42 @@ const Comparison = () => {
   ]);
 
   const handleIncrement = () => {
-    setMonthlyViews((prevViews) => (prevViews < 1000 ? prevViews + 100 : 100));
+    setMonthlyViews((prevViews) => (prevViews < 10000 ? prevViews + 100 : 100));
   };
 
   const handleDecrement = () => {
-    setMonthlyViews((prevViews) => (prevViews > 100 ? prevViews - 100 : 1000));
+    setMonthlyViews((prevViews) => (prevViews > 100 ? prevViews - 100 : 10000));
   };
+
+  // const handleIncrement = () => {
+  //   if (monthlyViews === 10) {
+  //     setMonthlyViews(100);
+  //   } else if (monthlyViews === 100) {
+  //     setMonthlyViews(1000);
+  //   } else if (monthlyViews === 1000) {
+  //     setMonthlyViews(10000)
+  //   } else if (monthlyViews === 10000) {
+  //     setMonthlyViews(100000)
+  //   }
+  //   else {
+  //     //if monthlyViews is 100.000, cycle back to 10
+  //     setMonthlyViews(10);
+  //   };
+  // };
+
+  // const handleDecrement = () => {
+  //   if (monthlyViews === 10){
+  //     setMonthlyViews(100000);
+  //   } else if (monthlyViews === 100000){
+  //     setMonthlyViews(10000)
+  //   } else if (monthlyViews === 10000) {
+  //     setMonthlyViews(1000)
+  //   } else if (monthlyViews === 1000) {
+  //     setMonthlyViews(100)
+  //   } else {
+  //     setMonthlyViews(10)
+  //   }
+  // };
 
   useEffect(() => {
     const calculatedCO2Value = ((gramsData * monthlyViews * 12) / 1000).toFixed(
@@ -33,7 +63,7 @@ const Comparison = () => {
     );
     setCO2Value(calculatedCO2Value);
 
-    const calculatedNumberTrees = Math.ceil(calculatedCO2Value / 10);
+    const calculatedNumberTrees = Math.ceil(calculatedCO2Value / 15);
     setNumberTrees(calculatedNumberTrees);
 
     const calculatedTeaCups = (Number(calculatedCO2Value) / 0.015).toFixed(2);
