@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useGrams } from "../context/GramsContext";
+import ResisableSlider from "./ResisableSlider";
 
 const Paperbox = styled.div`
   background-color: white;
@@ -42,14 +43,14 @@ const Results = ({ site }) => {
   return (
     <Paperbox>
       <div style={{ marginBottom: "16px" }}>
-        <h5 style={{ textAlign: "center", fontWeight: "bold" }}>
+        <h5 style={{ textAlign: "center", font:"Montserrat", textTransform: "uppercase" }}>
           Carbon Result
         </h5>
-        <p>
+        <p className="font-Inter">
           {site.url.length > 30 ? `${site.url.substring(0, 30)}..` : site.url}
         </p>
       </div>
-      <p>
+      <p className="font-Inter">
         This website is{" "}
         {site.cleanerThan >= 50 ? (
           <TextHighLightSuccess>
@@ -63,7 +64,8 @@ const Results = ({ site }) => {
         of web pages tested.
       </p>
       <br />
-      <p>
+      <ResisableSlider cleanerThan={site.cleanerThan}/>
+      <p className="font-Montserrat">
         {site.co2 < 0.5 ? (
           <TextHighLightSuccess>
             {site.co2.toFixed(2)}g of CO2
