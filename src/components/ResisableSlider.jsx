@@ -54,7 +54,7 @@ const Marks = ({ children, ...props }) => (
   </div>
 );
 
-const ResizableSlider = ({ cleanerThan }) => {
+const ResisableSlider = ({ cleanerThan }) => {
   return (
     <div>
       <StyledSlider
@@ -68,4 +68,4 @@ const ResizableSlider = ({ cleanerThan }) => {
   );
 };
 
-export default ResizableSlider;
+export default ResisableSlider;
