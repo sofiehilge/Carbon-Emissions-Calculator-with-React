@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useGrams } from "../context/GramsContext";
 import useNumberFormatter from "../hooks/useNumberformatter";
+import Lottie from "lottie-react";
+import AnimationPlus from "../assets/AnimationPlus.json";
+import AnimationMinus from "../assets/AnimationMinus.json";
 
 const Comparison = () => {
   const [monthlyViews, setMonthlyViews] = useState(1000);
@@ -72,25 +75,38 @@ const Comparison = () => {
 
   return (
     <>
-    
-        <p className="mt-8 font-Montserrat">Over a year, with</p>
-        <div className="flex items-center justify-center mt-2 space-x-4">
-          <button
-            onClick={handleDecrement}
-            className="px-4 py-2 text-white bg-gray-700  rounded-full"
-          >
-            -
-          </button>
-          <span className="text-2xl">
-            {formattedMonthlyViews && formattedMonthlyViews[0]}
-          </span>
-          <button
-            onClick={handleIncrement}
-            className="px-4 py-2 font-bold text-white bg-gray-700  rounded-full"
-          >
-            +
-          </button>
+      <p className="mt-8 font-Montserrat">Over a year, with</p>
+      <div className="flex items-center justify-center mt-2 space-x-4">
+        {/* <button
+          onClick={handleDecrement}
+          className="px-4 py-2 text-white bg-gray-700  rounded-full"
+        >
+          -
+        </button> */}
+        <div className="w-10 h-10" onClick={handleIncrement}>
+          <Lottie
+            animationData={AnimationMinus}
+            loop={true}
+            style={{ color: "#194266" }}
+          />
         </div>
+        <span className="text-2xl w-20">
+          {formattedMonthlyViews && formattedMonthlyViews[0]}
+        </span>
+        {/*  <button
+          onClick={handleIncrement}
+          className="px-4 py-2 font-bold text-white bg-gray-700  rounded-full"
+        >
+          +
+        </button> */}
+        <div className="w-10 h-10" onClick={handleIncrement}>
+          <Lottie
+            animationData={AnimationPlus}
+            loop={true}
+            style={{ color: "#194266" }}
+          />
+        </div>
+      </div>
       <div className="flex flex-row items-center justify-center">
         <p className="mt-2 font-Montserrat">
           monthly page views, this web page produces
@@ -98,27 +114,28 @@ const Comparison = () => {
         <span className="mt-2 text-xl font-Montserrat px-5">
           {formattedCO2Value && formattedCO2Value[0]}
         </span>
-      <p className="mt-2 font-Montserrat">kg of CO2.</p>
-      <br />
+        <p className="mt-2 font-Montserrat">kg of CO2.</p>
+        <br />
       </div>
-      <p className="font-Inter">
-        As much CO2 as boiling water for
-        <span className="text-xl font-Inter px-5">
-          {formattedNumberTee && formattedNumberTee[0]}
-        </span>{" "}
-        cups of tea
-      </p>
+      <div className="flex justify-center items-center">
+        <p className="font-Inter flex justify-center">
+          As much CO2 as boiling water for
+          <span className="text-xl font-Inter px-5">
+            {formattedNumberTee && formattedNumberTee[0]}
+          </span>{" "}
+          cups of tea
+        </p>
+      </div>
       <p className="font-Montserrat">
         This webpage emits the same amount as{" "}
         <span className="text-xl font-bold px-5"> {numberTrees}</span> trees can
         absorb in one year
       </p>
-      <b className="font-Montserrat">Take action here ›</b>
       <a
         href="https://withyodo.com/get-access/"
         className=" font-Montserrat inline-block w-1/3 p-2 px-12 m-4 text-sm text-center text-white bg-black rounded-full"
       >
-        Get early access
+        Take action
       </a>
     </>
   );

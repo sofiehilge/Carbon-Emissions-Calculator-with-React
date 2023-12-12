@@ -10,36 +10,13 @@ import Loader from "./components/Loader"; // Import the Loader component
 import Background from "./components/Background";
 import Navbar from "./components/Navbar";
 
+
 function App() {
   const [url, setUrl] = useState("");
-  const { data, refetch, isError } = useSite(url);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingWithDelay, setIsLoadingWithDelay] = useState(true);
+  const { data, refetch, fetchStatus, isError } = useSite(url);
+  const isLoading = fetchStatus === "fetching";
 
   const site = data || { cleanerThan: 0 };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoadingWithDelay(true);
-      try {
-        setIsLoading(true);
-        //simulate fetching data
-        //replace this with you actual data fetching logic
-        const response = await fetch("your-api-endpoint");
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        console.error("Error:", error);
-      } finally {
-        setIsLoading(false);
-        //set isLoading to false after a delay of 3 seconds
-        setTimeout(() => {
-          setIsLoadingWithDelay(false);
-        }, 3000);
-      }
-    };
-    fetchData();
-  }, [url]);
 
   return (
     <>
@@ -50,11 +27,12 @@ function App() {
 
       <div className="p-4 m-4 absolute">
         <div className="flex justify-center items-center my-16">
-            <h1 className="text-2xl text-white w-max md:text-4xl font-Montserrat top">
-              Calculate your emission with Yodo
-            </h1>
+          <h1 className="text-2xl text-white w-max md:text-4xl font-Montserrat top">
+            Calculate your emission with Yodo
+          </h1>
+         
         </div>
-          
+
         <div className="w-full p-4 mb-2 bg-white rounded-xl">
           <div className="flex justify-center pt-6 pb-6">
             <h2 className="my-4 text-3xl text-black font-Montserrat">
@@ -81,16 +59,15 @@ function App() {
               className="p-2 px-12 mb-6 text-sm text-white bg-black rounded-full font-Inter"
               type="submit"
             >
-              {isLoadingWithDelay ? "Loading..." : "Search ›"}
+              {isLoading ? "Loading..." : "Search ›"}
             </button>
           </form>
           <SiteProvider value={{ cleanerThan: site.cleanerThan }}>
             <div className="w-full">
-          
-              {!isLoadingWithDelay && data && <Results site={data} />}
-              {!isLoadingWithDelay && isError && <Error />}
-              {/* {!isLoadingWithDelay && data && <ResisableSlider cleanerThan={site.cleanerThan} />} */}
-              {!isLoadingWithDelay && data && <Comparison />}
+              {isLoading && <Loader />} {/* Render Loader component */}
+              {data && <Results site={data} />}
+              {isError && <Error />}
+              {data && <Comparison />}
             </div>
           </SiteProvider>
         </div>
